@@ -12,7 +12,9 @@ namespace Lab2
             double answer = 0;
 
             // code here
+            for (int i = 0; i <= n; i += 1)
 
+                answer = answer + Math.Sin(x) + Math.Sin(i * x) / Math.Pow(x,n - 1);
             // end
 
             return answer;
