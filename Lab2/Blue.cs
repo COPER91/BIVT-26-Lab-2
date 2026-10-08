@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 
@@ -12,9 +12,12 @@ namespace Lab2
             double answer = 0;
 
             // code here
-            for (int i = 0; i <= n; i += 1)
-
-                answer = answer + Math.Sin(x) + Math.Sin(i * x) / Math.Pow(x,n - 1);
+            double pow = 1;
+            for (int i = 1; i <= n; i++)
+            {
+                answer += Math.Sin(i * x) / pow;
+                pow *= x;
+            }
             // end
 
             return answer;
@@ -24,7 +27,12 @@ namespace Lab2
             double answer = 0;
 
             // code here
-
+            double term = 1;
+            for (int i = 1; i <= n; i++)
+            {
+                term = term * (-5) / i;
+                answer += term;
+            }
             // end
 
             return answer;
@@ -34,7 +42,14 @@ namespace Lab2
             long answer = 0;
 
             // code here
-
+            long a = 0, b = 1;
+            for (int i = 1; i <= n; i++)
+            {
+                answer += a;
+                long next = a + b;
+                a = b;
+                b = next;
+            }
             // end
 
             return answer;
@@ -44,7 +59,14 @@ namespace Lab2
             int answer = 0;
 
             // code here
-
+            long sum = 0;
+            long term = a;
+            while (sum + term <= L)
+            {
+                sum += term;
+                term += h;
+                answer++;
+            }
             // end
 
             return answer;
@@ -54,7 +76,18 @@ namespace Lab2
             double answer = 0;
 
             // code here
-
+            double ch = 0, zn = 1;
+            double elem = ch / zn;
+            int i = 1;
+            do
+            {
+                ch += i;
+                zn *= x;
+                answer += elem;
+                elem = ch / zn;
+                i++;
+            }
+            while (elem > 0.0001);
             // end
 
             return answer;
@@ -64,7 +97,12 @@ namespace Lab2
             int answer = 0;
 
             // code here
-
+            long cells = S;
+            while (cells < L)
+            {
+                cells *= 2;
+                answer += h;
+            }
             // end
 
             return answer;
@@ -76,6 +114,33 @@ namespace Lab2
             int c = 0;
 
             // code here
+            double k = 1 + I / 100;
+            // A:
+            double daily = S;
+            for (int d = 1; d <= 7; d++)
+            {
+                a += daily;
+                daily *= k;
+            }
+
+            // B:
+            daily = S;
+            double km = 0;
+            while (km < 100)
+            {
+                km += daily;
+                daily *= k;
+                b++;
+            }
+
+            // C:
+            daily = S;
+            c = 0;
+            while (daily <= 42)
+            {
+                daily *= k;
+                c++;
+            }
 
             // end
 
@@ -87,7 +152,39 @@ namespace Lab2
             double SY = 0;
 
             // code here
+            int k = 0;
 
+            while (true)
+            {
+                double x = a + k * h;
+
+                if (x > b + 0.000000001)
+                    break;
+
+                double s = 0;
+                double elem = 1;
+                int i = 0;
+
+                while (true)
+                {
+                    s += elem;
+
+                    if (Math.Abs(elem) < E)
+                        break;
+
+                    elem = elem * (2.0 * i + 3) * x * x
+                           / ((2.0 * i + 1) * (i + 1));
+
+                    i++;
+                }
+
+                SS += s;
+
+                double y = (1 + 2 * x * x) * Math.Exp(x * x);
+                SY += y;
+
+                k++;
+            }
             // end
 
             return (SS, SY);
